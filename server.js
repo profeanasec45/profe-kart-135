@@ -24,7 +24,7 @@ const bank=[
 [3,'Después de una contingencia, proponen regresar sin verificar las instalaciones. ¿Qué corresponde?',['Esperar revisión y autorización de condiciones seguras','Regresar de inmediato','Dejar que cada docente decida por sí solo','Permitir ingreso solo a estudiantes mayores'],0,'El retorno requiere condiciones de seguridad verificadas.']
 ];
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=crypto.randomInt(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
-let state='lobby',round=0,deadline=0,players=new Map(),nameKeys=new Set(),timer=null,hostSockets=new Set();const DUR=18000,REVEAL=1800;
+let state='lobby',round=0,deadline=0,players=new Map(),nameKeys=new Set(),timer=null,hostSockets=new Set();const DUR=10000,REVEAL=1800;
 const leaderboard=()=>[...players.values()].sort((a,b)=>b.score-a.score||b.correct-a.correct||a.joined-b.joined).map((p,i)=>({rank:i+1,name:p.name,avatar:p.avatar,score:p.score,correct:p.correct,answered:p.answers.length,connected:!!p.socketId}));
 const screen=()=>({state,round,remaining:Math.max(0,deadline-Date.now()),players:players.size,leaderboard:leaderboard().slice(0,10)});
 const broadcast=()=>io.emit('race',screen());
