@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: profe-kart-135
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: HOST_KEY
+        generateValue: true
